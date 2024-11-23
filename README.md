@@ -58,7 +58,7 @@ The following environment variables must be configured:
 
 ### Linux/MacOS
 
-II. Open your terminal and edit your shell configuration file:
+I. Open your terminal and edit your shell configuration file:
    ```bash
    # For bash users
    nano ~/.bashrc
