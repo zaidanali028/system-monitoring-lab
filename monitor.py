@@ -4,8 +4,14 @@ from mailjet_rest import Client
 import psutil
 
 # Set up Mailjet credentials as environment variables for added security
-api_key = os.getenv('MAIL_JET_API_KEY')
-api_secret = os.getenv('MAIL_JET_API_SECRET')
+# This approach avoids storing sensitive credentials in a file like .env
+# which could potentially be exposed in version control systems (e.g., Git) if not ignored in .gitignore file
+
+api_key = os.getenv('MAIL_JET_API_KEY')  # Retrieves the API key from the OS environment
+api_secret = os.getenv('MAIL_JET_API_SECRET')  # Retrieves the API secret from the OS environment
+
+# Using environment variables centralizes configuration, makes it more secure, and avoids file dependencies.
+
 
 def send_alert(subject, message):
     """Sends an alert email with the specified subject and message."""

@@ -38,15 +38,90 @@ pip install psutil mailjet_rest
 
 ## Configuration
 
-1. Add  `environment-variables` to your systems' environment :
-```plaintext
-MAIL_JET_API_KEY=your_api_key_here
-MAIL_JET_API_SECRET=your_api_secret_here
-SYSTEM_EMAIL=your_sender_email@domain.com
-ADMIN_EMAIL=admin_recipient@domain.com
+4. Environment Variables Setup Guide
+
+This guide explains how to set up the required environment variables for secure credential management across different operating systems.
+
+## Overview
+
+Instead of using `.env` files, we recommend adding environment variables directly to your system for enhanced security. This approach prevents accidental exposure of sensitive credentials in configuration files.
+
+## Required Environment Variables
+
+The following environment variables must be configured:
+- `MAIL_JET_API_KEY`: Your Mailjet API key
+- `MAIL_JET_API_SECRET`: Your Mailjet API secret
+- `SYSTEM_EMAIL`: Sender email address
+- `ADMIN_EMAIL`: Admin recipient email address
+
+## Setup Instructions(ENVIRONMENT VARIABLES)
+
+### Linux/MacOS
+
+II. Open your terminal and edit your shell configuration file:
+   ```bash
+   # For bash users
+   nano ~/.bashrc
+   
+   # For zsh users
+   nano ~/.zshrc
+   ```
+
+II. Add the following lines to the file:
+   ```bash
+   export MAIL_JET_API_KEY="your_api_key_here"
+   export MAIL_JET_API_SECRET="your_api_secret_here"
+   export SYSTEM_EMAIL="your_sender_email@domain.com"
+   export ADMIN_EMAIL="admin_recipient@domain.com"
+   ```
+
+III. Save and reload the configuration:
+   ```bash
+   # For bash users
+   source ~/.bashrc
+   
+   # For zsh users
+   source ~/.zshrc
+   ```
+
+### Windows
+
+I. Access Environment Variables:
+   - Open System Properties
+   - Click on "Environment Variables" in the Advanced tab
+
+II. Add New System Variables:
+   - Click "New" under System Variables
+   - Add each variable separately:
+     * Variable: `MAIL_JET_API_KEY` | Value: your_api_key_here
+     * Variable: `MAIL_JET_API_SECRET` | Value: your_api_secret_here
+     * Variable: `SYSTEM_EMAIL` | Value: your_sender_email@domain.com
+     * Variable: `ADMIN_EMAIL` | Value: admin_recipient@domain.com
+
+## Security Note
+
+This method is preferred over `.env` files as it:
+- Keeps sensitive credentials separate from your codebase
+- Reduces the risk of accidentally committing credentials to version control
+- Makes environment variables available system-wide
+- Provides better credential management across different environments
+
+## Verification
+
+To verify your setup, you can echo the variables in your terminal:
+
+```bash
+# Linux/MacOS
+echo $MAIL_JET_API_KEY
+
+# Windows (Command Prompt)
+echo %MAIL_JET_API_KEY%
+
+# Windows (PowerShell)
+echo $env:MAIL_JET_API_KEY
 ```
 
-2. Adjust monitoring thresholds in `monitor.py` by updating the following variables:
+5. Adjust monitoring thresholds in `monitor.py` by updating the following variables:
 ```python
 CPU_THRESHOLD = 80  # CPU usage percentage
 RAM_THRESHOLD = 85  # RAM usage percentage
@@ -62,9 +137,9 @@ python monitor.py
 
 For continuous monitoring, set up a cron job (Linux/Mac) or Task Scheduler (Windows).
 
-### Example Cron Entry (Every 5 minutes)
+### Example Cron Entry (Every 24 hours)
 ```bash
-*/5 * * * * /path/to/venv/bin/python /path/to/monitor.py
+0 0 * * * /path/to/venv/bin/python /path/to/monitor.py
 ```
 
 ## Sample Alert Email
